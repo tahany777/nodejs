@@ -44,5 +44,28 @@ ex: VS code
 * set of functions => excuted by your code
 * collections of prewritten code that users can use to optimize tasks.
 
+### CI/CD concepts
+
+> With the continuous method of software development, you continuously build, test, and deploy iterative code changes. This iterative process helps reduce the chance that you develop new code based on buggy or failed previous versions.
+
 #### steps to create our express server
 
+```bash
+npm init -y
+
+## change start server.js to index.js
+"start": "node index.js" 
+## create server
+
+npm i express dotenv nodemon
+
+"start": "nodemon index.js"
+
+npm start
+
+npm i --save-dev jest supertest
+## OR
+npm i -D jest supertest
+
+"test": "jest --coverage --verbose",
+```
