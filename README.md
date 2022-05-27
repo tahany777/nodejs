@@ -65,5 +65,7 @@ npm start
 
 npm i --save-dev jest supertest
 ## OR
-npm i -D jest supertest 
+npm i -D jest supertest
+
+"test": "jest --coverage --verbose",
 ```
