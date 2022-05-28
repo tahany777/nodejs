@@ -57,7 +57,7 @@ npm init -y
 "start": "node index.js" 
 ## create server
 
-npm i express dotenv nodemon
+npm i express dotenv nodemon cors
 
 "start": "nodemon index.js"
 

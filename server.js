@@ -1,15 +1,37 @@
 'use strict';
 
 const express = require("express");
-
+const cors = require('cors');
+const logger = require('./middleware/logger.js')
+const getAgent = require('./middleware/getAgent.js');
+const square = require('./middleware/square.js');
 const app = express();
 
-function start(port){
-    app.listen(port,() => {
-        console.log(`running on port ${port}`)
-    })
-}
 
+//1- Built-in Express middlewares
+
+app.use(express.json());
+app.use(cors())
+
+//2- Application-Level/ Global custom middleware
+app.use(logger);
+
+//3- Route-Level Middleware
+app.get('/test', getAgent,(req, res, next) => {
+    res.json({
+        message: 'test route',
+        name: req.myName,
+        type: req.reqType
+    })
+})
+
+//Route-level configurable middleware
+app.get('/number', square(5), (req, res) => {
+    res.send(`number route ${req.num}`)
+})
+app.get('/throwing-error', square('hi'), (req, res) => {
+    res.send(`number route ${req.num}`)
+})
 //route
 
 app.get('/', (req, res) => {
@@ -22,6 +44,13 @@ app.get('/data', (req, res) => {
         email: 'ta@hotmail.comm'
     })
 })
+
+function start(port){
+    app.listen(port,() => {
+        console.log(`running on port ${port}`)
+    })
+}
+
 module.exports = {
     app: app,
     start: start,
