@@ -92,7 +92,7 @@ const square = (num) => {
             req.num = num * num;
             next();
         } else {
-            next(`${n} is not a number`)
+            next(`${num} is not a number`)
         }
         
     }

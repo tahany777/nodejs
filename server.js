@@ -5,6 +5,7 @@ const cors = require('cors');
 const logger = require('./middleware/logger.js')
 const getAgent = require('./middleware/getAgent.js');
 const square = require('./middleware/square.js');
+const errorHandler = require('./handler/500.js')
 const app = express();
 
 
@@ -26,9 +27,15 @@ app.get('/test', getAgent,(req, res, next) => {
 })
 
 //Route-level configurable middleware
-app.get('/number', square(5), (req, res) => {
+// app.get('/number', square(5), (req, res) => {
+//     res.send(`number route ${req.num}`)
+// })
+
+app.get('/number/:id', square(6), (req, res) => {
     res.send(`number route ${req.num}`)
 })
+
+
 app.get('/throwing-error', square('hi'), (req, res) => {
     res.send(`number route ${req.num}`)
 })
@@ -44,6 +51,9 @@ app.get('/data', (req, res) => {
         email: 'ta@hotmail.comm'
     })
 })
+
+//it should be here after all route
+app.use(errorHandler)
 
 function start(port){
     app.listen(port,() => {
