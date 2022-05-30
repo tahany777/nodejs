@@ -5,6 +5,7 @@ const cors = require('cors');
 const logger = require('./middleware/logger.js')
 const getAgent = require('./middleware/getAgent.js');
 const square = require('./middleware/square.js');
+const validator = require('./middleware/validator.js');
 const errorHandler = require('./handler/500.js')
 const app = express();
 
@@ -52,6 +53,12 @@ app.get('/data', (req, res) => {
     })
 })
 
+app.get('/person', validator, (req, res) => {
+    const person = {
+        name: req.query.name
+    }
+    res.json(person);
+});
 //it should be here after all route
 app.use(errorHandler)
 
