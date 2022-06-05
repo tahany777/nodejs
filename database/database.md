@@ -25,6 +25,18 @@
 > node-postgres is a collection of node.js modules for interfacing with your PostgreSQL database. It has support for callbacks, promises, async/await, connection pooling, prepared statements, cursors, streaming results, C/C++ bindings, rich type parsing, and more!
 
 ```javascript
+//index.js => main index.js
+'use strict';
+require('dotenv').config();
+const server = require('./server.js');
+const {db} = require('./models/index.js');
+
+db.sync().then(() => {
+    server.start(process.env.PORT || 3000);
+}).catch(console.error)
+```
+
+```javascript
 //models - index.js
 'use strict'
 
@@ -63,6 +75,11 @@ module.exports = People
 //evn
 
 DATABASE_URL=postgresql://tahany:12345@localhost:5432/class3
+```
+
+```javascript
+//people.route.js
+
 ```
 
 ```bash
